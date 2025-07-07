@@ -1,14 +1,33 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { FaCar, FaGasPump, FaCogs, FaUsers } from 'react-icons/fa'
 
 const CarCard = ({ car }) => {
+  const [imageError, setImageError] = useState(false)
+
+  // Function to get the correct image URL
+  const getImageUrl = (imagePath) => {
+    // If no image path or error occurred, use default image
+    if (!imagePath || imageError) {
+      return '/default-car.png'
+    }
+
+    // Construct full URL for server-uploaded images
+    // Assumes backend server is running on localhost:4000 and uses '/uploads' path
+    return `http://localhost:4000/${imagePath.replace(/\\/g, '/')}`
+  }
+
+  const handleImageError = () => {
+    setImageError(true)
+  }
+
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl">
       <div className="relative">
-        <img 
-          src={car.images[0] || '/default-car.jpg'} 
-          alt={car.name} 
+        <img
+          src={getImageUrl(car.images[0])}
+          alt={car.name}
+          onError={handleImageError}
           className="w-full h-48 object-cover"
         />
         {!car.isAvailable && (
