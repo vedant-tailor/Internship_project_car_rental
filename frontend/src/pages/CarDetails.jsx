@@ -6,6 +6,23 @@ import { FaSpinner, FaArrowLeft } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 const CarDetails = () => {
+  const [imageError, setImageError] = useState(false)
+
+  // Function to get the correct image URL
+  const getImageUrl = (imagePath) => {
+    // If no image path or error occurred, use default image
+    if (!imagePath || imageError) {
+      return '/default-car.png'
+    }
+
+    // Construct full URL for server-uploaded images
+    // Assumes backend server is running on localhost:4000 and uses '/uploads' path
+    return `http://localhost:4000/${imagePath.replace(/\\/g, '/')}`
+  }
+
+  const handleImageError = () => {
+    setImageError(true)
+  }
   const [car, setCar] = useState(null)
   const [isLoading, setIsLoading] = useState(true)
   const [bookingDetails, setBookingDetails] = useState({
@@ -91,9 +108,10 @@ const CarDetails = () => {
 
       <div className="grid md:grid-cols-2 gap-8">
         <div>
-          <img 
-            src={car.images[0] || '/default-car.jpg'} 
-            alt={car.name} 
+        <img
+          src={getImageUrl(car.images[0])}
+          alt={car.name}
+          onError={handleImageError}
             className="w-full rounded-lg shadow-md"
           />
           <div className="mt-4 grid grid-cols-3 gap-2">
