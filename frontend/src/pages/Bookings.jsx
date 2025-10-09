@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from 'react'
+// --- CORRECT THIS LINE ---
+import React, { useState, useEffect } from 'react' 
+// Ensure 'useState' is imported and capitalized
+
 import { carService } from '../services/carService'
 import BookingCard from '../components/BookingCard'
 import { FaSpinner } from 'react-icons/fa'
 import toast from 'react-hot-toast'
 
 const Bookings = () => {
+  // --- ENSURE THESE LINES USE 'useState' (capital 'S') ---
   const [bookings, setBookings] = useState([])
   const [isLoading, setIsLoading] = useState(true)
 

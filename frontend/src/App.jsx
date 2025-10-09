@@ -13,6 +13,7 @@ import CarDetails from './pages/CarDetails'
 import Bookings from './pages/Bookings'
 import AdminDashboard from './pages/AdminDashboard'
 import AddCarListing from './pages/AddCarListing'
+import AdminBookings from './pages/AdminBookings' // --- NEW IMPORT ---
 
 // Component Imports
 import ProtectedRoute from './components/ProtectedRoute'
@@ -32,11 +33,15 @@ function App() {
           <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="bookings" element={<Bookings />} />
-            <Route path="add-car-listing" element={<AddCarListing />} /> 
+            {/* The line below is now redundant if only admins can add cars */}
+            {/* <Route path="add-car-listing" element={<AddCarListing />} /> */}
           </Route>
           
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="admin" element={<AdminDashboard />} />
+            {/* --- NEW ROUTES FOR ADMIN --- */}
+            <Route path="admin/bookings" element={<AdminBookings />} />
+            <Route path="add-car-listing" element={<AddCarListing />} /> 
           </Route>
         </Route>
       </Routes>

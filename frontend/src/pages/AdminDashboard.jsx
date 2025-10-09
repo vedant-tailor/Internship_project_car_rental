@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-import { FaSpinner, FaCar, FaUser, FaClipboardList, FaMoneyBillWave } from 'react-icons/fa'
+import { FaSpinner, FaCar, FaUser, FaClipboardList, FaMoneyBillWave, FaPlus } from 'react-icons/fa' // Import FaPlus
 import toast from 'react-hot-toast'
+import { Link } from 'react-router-dom' // Import Link
 
 const AdminDashboard = () => {
   const [stats, setStats] = useState(null)
@@ -10,7 +11,8 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchAdminStats = async () => {
       try {
-        const response = await axios.get('/api/admin/stats')
+        // Axios is already configured to use the proxy, so we can use relative paths
+        const response = await axios.get('/api/admin/stats') 
         setStats(response.data.stats)
         setIsLoading(false)
       } catch (error) {
@@ -32,7 +34,16 @@ const AdminDashboard = () => {
 
   return (
     <div className="container mx-auto px-4 py-6">
-      <h1 className="text-3xl font-bold mb-6 text-primary-600">Admin Dashboard</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-3xl font-bold text-primary-600">Admin Dashboard</h1>
+        {/* --- NEW CODE START --- */}
+        <Link to="/add-car-listing" className="btn-primary flex items-center px-4 py-2 rounded">
+          <FaPlus className="mr-2" />
+          Add Car
+        </Link>
+        {/* --- NEW CODE END --- */}
+      </div>
+
       <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard 
           icon={<FaCar />} 
@@ -52,12 +63,17 @@ const AdminDashboard = () => {
           value={stats.totalUsers} 
           color="text-purple-600" 
         />
-        <StatCard 
-          icon={<FaClipboardList />} 
-          title="Total Bookings" 
-          value={stats.totalBookings} 
-          color="text-yellow-600" 
-        />
+        {/* --- MODIFIED CODE START (Wrapped StatCard in a Link) --- */}
+        <Link to="/admin/bookings">
+          <StatCard 
+            icon={<FaClipboardList />} 
+            title="Total Bookings" 
+            value={stats.totalBookings} 
+            color="text-yellow-600" 
+            isLink={true} // Added a prop to show it's clickable
+          />
+        </Link>
+        {/* --- MODIFIED CODE END --- */}
         <StatCard 
           icon={<FaClipboardList />} 
           title="Active Bookings" 
@@ -75,8 +91,9 @@ const AdminDashboard = () => {
   )
 }
 
-const StatCard = ({ icon, title, value, color }) => (
-  <div className="bg-white shadow-md rounded-lg p-6 flex items-center">
+// --- MODIFIED StatCard component to show hover effect ---
+const StatCard = ({ icon, title, value, color, isLink = false }) => (
+  <div className={`bg-white shadow-md rounded-lg p-6 flex items-center ${isLink ? 'transition-all hover:shadow-xl hover:scale-105' : ''}`}>
     <div className={`mr-4 text-3xl ${color}`}>
       {icon}
     </div>
