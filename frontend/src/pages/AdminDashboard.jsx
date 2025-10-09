@@ -83,7 +83,7 @@ const AdminDashboard = () => {
         <StatCard 
           icon={<FaMoneyBillWave />} 
           title="Total Revenue" 
-          value={`$${stats.totalRevenue.toFixed(2)}`} 
+          value={`INR ${stats.totalRevenue.toFixed(2)}`} 
           color="text-green-700" 
         />
       </div>

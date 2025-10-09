@@ -21,7 +21,7 @@ const CarCard = ({ car }) => {
     setImageError(true);
   };
 
-  return (
+ return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden transform transition-all hover:scale-105 hover:shadow-xl flex flex-col h-full">
       <div className="relative">
         <img

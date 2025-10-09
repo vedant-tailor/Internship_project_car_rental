@@ -42,7 +42,7 @@ const Register = () => {
         <h2 className="text-2xl font-bold text-center mb-6 text-primary-600">Register</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <FaUser className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            
             <input
               type="text"
               name="name"
@@ -54,7 +54,7 @@ const Register = () => {
             />
           </div>
           <div className="relative">
-            <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            
             <input
               type="email"
               name="email"
@@ -66,7 +66,7 @@ const Register = () => {
             />
           </div>
           <div className="relative">
-            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            
             <input
               type="password"
               name="password"
@@ -79,7 +79,7 @@ const Register = () => {
             />
           </div>
           <div className="relative">
-            <FaPhone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            
             <input
               type="tel"
               name="phone"

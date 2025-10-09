@@ -8,6 +8,7 @@ const multer = require('multer');
 const path = require('path');
 const dotenv = require('dotenv');
 
+
 // Load environment variables
 dotenv.config();
 
@@ -549,6 +550,30 @@ app.get('/api/admin/stats', verifyToken, verifyAdmin, async (req, res) => {
   }
 });
 
+
+// MOCK PAYMENT VERIFICATION ROUTE
+app.post('/api/mock-payment', verifyToken, async (req, res) => {
+  const { bookingId } = req.body;
+
+  try {
+    const booking = await Booking.findById(bookingId);
+
+    // Security check: ensure the booking belongs to the logged-in user
+    if (booking.user.toString() !== req.user.userId) {
+      return res.status(403).json({ success: false, message: 'Unauthorized' });
+    }
+
+    // Update the booking
+    await Booking.findByIdAndUpdate(bookingId, {
+      paymentStatus: 'Paid',
+    });
+
+    res.json({ success: true, message: 'Mock payment successful' });
+  } catch (error) {
+    console.error('Mock payment error:', error);
+    res.status(500).json({ success: false, message: 'Server error' });
+  }
+});
 // Error handling middleware
 app.use((err, req, res, next) => {
   console.error('Unhandled error:', err);

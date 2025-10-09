@@ -12,6 +12,7 @@ const Navbar = ({ user, onLogout }) => {
         </Link>
         <div className="flex items-center space-x-4">
           <Link to="/cars" className="text-gray-700 hover:text-primary-600">Cars</Link>
+           <Link to="/about" className="text-gray-700 hover:text-primary-600">About</Link>
           {user && (
             <>
               {user.isAdmin ? (
@@ -21,7 +22,6 @@ const Navbar = ({ user, onLogout }) => {
               )}
               <div className="flex items-center space-x-2">
                 <FaUser className="text-gray-600" />
-                <span className="text-gray-800">{user.name}</span>
                 <button 
                   onClick={onLogout} 
                   className="text-red-500 hover:text-red-600 ml-2"

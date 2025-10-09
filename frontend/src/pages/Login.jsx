@@ -28,7 +28,7 @@ const Login = () => {
         <h2 className="text-2xl font-bold text-center mb-6 text-primary-600">Login</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="relative">
-            <FaEnvelope className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            
             <input
               type="email"
               placeholder="Email"
@@ -39,7 +39,7 @@ const Login = () => {
             />
           </div>
           <div className="relative">
-            <FaLock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+            
             <input
               type="password"
               placeholder="Password"
