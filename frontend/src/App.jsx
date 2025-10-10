@@ -1,7 +1,6 @@
 import React from 'react'
 import { Routes, Route, Navigate } from 'react-router-dom'
 
-
 // Context Imports
 import { AuthProvider } from './context/AuthContext'
 
@@ -15,8 +14,11 @@ import CarDetails from './pages/CarDetails'
 import Bookings from './pages/Bookings'
 import AdminDashboard from './pages/AdminDashboard'
 import AddCarListing from './pages/AddCarListing'
-import AdminBookings from './pages/AdminBookings' // --- NEW IMPORT ---
-import MockPayment from './pages/MockPayment'; // --- NEW IMPORT ---
+import AdminBookings from './pages/AdminBookings'
+// --- NEW IMPORTS ---
+import Payment from './pages/Payment'
+import PaymentSuccess from './pages/PaymentSuccess'
+import PaymentCancel from './pages/PaymentCancel'
 
 // Component Imports
 import ProtectedRoute from './components/ProtectedRoute'
@@ -32,19 +34,19 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="cars" element={<CarList />} />
           <Route path="cars/:id" element={<CarDetails />} />
-          <Route path="about" element={<About />} /> {/* --- NEW ROUTE --- */}
+          <Route path="about" element={<About />} />
           
           <Route element={<ProtectedRoute allowedRoles={['user', 'admin']} />}>
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="bookings" element={<Bookings />} />
-            <Route path="mock-payment" element={<MockPayment />} /> {/* --- NEW ROUTE --- */}
-            {/* The line below is now redundant if only admins can add cars */}
-            {/* <Route path="add-car-listing" element={<AddCarListing />} /> */}
+            {/* --- NEW PAYMENT ROUTES --- */}
+            <Route path="payment" element={<Payment />} />
+            <Route path="payment-success" element={<PaymentSuccess />} />
+            <Route path="payment-cancel" element={<PaymentCancel />} />
           </Route>
           
           <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="admin" element={<AdminDashboard />} />
-            {/* --- NEW ROUTES FOR ADMIN --- */}
             <Route path="admin/bookings" element={<AdminBookings />} />
             <Route path="add-car-listing" element={<AddCarListing />} /> 
           </Route>
