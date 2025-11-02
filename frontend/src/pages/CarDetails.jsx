@@ -144,7 +144,7 @@ const CarDetails = () => {
               </div>
               <div>
                 <p className="text-gray-600">Price</p>
-                <p className="font-semibold">INR {car.pricePerDay}/day</p>
+                <p className="font-semibold">₹{car.pricePerDay}/day</p>
               </div>
             </div>
 
@@ -209,3 +209,4 @@ const CarDetails = () => {
 }
 
 export default CarDetails
+
